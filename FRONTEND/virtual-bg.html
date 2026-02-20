@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MYCARD - Virtual Background</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <!-- TOP NAV -->
+  <header class="nav">
+    <div class="dashTopLeft">
+      <button class="btn btn--chip btn--ghost" id="menuBtn" type="button">☰</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR OVERLAY + SIDEBAR (ids required by sidebar.js) -->
+  <div class="sideOverlay" id="sideOverlay" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar__top">
+      <div class="sidebar__user">
+        <div class="avatar" id="avatar">M</div>
+        <div class="userTxt">
+          <div class="userName" id="userName">MYCARD</div>
+          <div class="userEmail" id="userEmail">Welcome</div>
+        </div>
+      </div>
+      <button class="btn btn--chip btn--ghost" id="closeMenu" type="button">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a class="menuItem" href="dashboard.html">🏠 Dashboard</a>
+      <a class="menuItem" href="wizard.html">➕ New Card</a>
+      <a class="menuItem" href="editor.html">✏️ Edit Card</a>
+      <a class="menuItem" href="card.html">👁️ View Card</a>
+      <a class="menuItem" href="contacts.html">👥 Contacts</a>
+      <a class="menuItem" href="analytics.html">📊 Analytics</a>
+      <a class="menuItem active" href="virtual-bg.html">🖼️ Virtual Background</a>
+      <a class="menuItem" href="email-signature.html">✉️ Email Signature</a>
+      <a class="menuItem" href="qr.html">🔳 QR</a>
+      <a class="menuItem" href="index.html">🌐 Landing</a>
+      <button class="menuItem" id="logoutBtn" type="button">🚪 Logout</button>
+    </nav>
+  </aside>
+
+  <!-- PAGE -->
+  <main class="vbPage">
+    <div class="vbHead">
+      <h1 class="vbTitle">Virtual Background</h1>
+      <div class="vbSub">Choose a card, upload a background, preview, then download or share.</div>
+    </div>
+
+    <div class="vbWrap">
+      <!-- LEFT CONTROLS -->
+      <section class="vbControls">
+        <div class="vbBlock">
+          <div class="vbBlockTitle">Select Card</div>
+          <label class="field" style="margin:0;">
+            <span>Card</span>
+            <select class="input" id="cardSelect"></select>
+          </label>
+        </div>
+
+        <div class="vbBlock">
+          <div class="vbBlockTitle">Choose Options</div>
+          <div class="vbOptions">
+            <label class="vbOpt"><input type="checkbox" id="optName" checked> <span>Name</span></label>
+            <label class="vbOpt"><input type="checkbox" id="optJob" checked> <span>Job Title</span></label>
+            <label class="vbOpt"><input type="checkbox" id="optCompany" checked> <span>Company</span></label>
+            <label class="vbOpt"><input type="checkbox" id="optLocation" checked> <span>Location</span></label>
+            <label class="vbOpt"><input type="checkbox" id="optQr" checked> <span>QR Code</span></label>
+            <label class="vbOpt"><input type="checkbox" id="optPhoto" checked> <span>Photo</span></label>
+          </div>
+        </div>
+
+        <div class="vbBlock">
+          <div class="vbBlockTitle">Upload Background</div>
+
+          <div class="vbUpload">
+            <div class="vbUploadLeft">
+              <div class="vbUploadTitle">Background Image</div>
+              <div class="vbUploadSub">Use JPG/PNG. Recommended: 1920×1080</div>
+            </div>
+
+            <input id="bgUpload" type="file" accept="image/*" style="display:none" />
+            <button class="vbFileBtn" id="chooseBgBtn" type="button">Choose Photo</button>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="vbBlockTitle" style="margin:0 0 8px;">Or choose color</div>
+          <div class="vbRow">
+            <input class="input" id="bgColor" type="color" style="height:54px; width:90px; padding:6px;" />
+            <input class="input" id="bgColorText" type="text" placeholder="#000000" />
+          </div>
+        </div>
+
+        <div class="vbActions">
+          <button class="btn btn--xl btn--ghost" id="goDashboardBtn" type="button">← Back</button>
+          <button class="btn btn--primary btn--xl" id="downloadBtn" type="button">⬇ Download PNG</button>
+          <button class="btn btn--xl" id="shareBtn" type="button">📤 Share</button>
+        </div>
+
+        <div class="vbSmallNote">If Share is not supported, it will download instead.</div>
+      </section>
+
+      <!-- RIGHT PREVIEW -->
+      <section class="vbPreviewSide">
+        <div class="previewTitle">Virtual Background Preview</div>
+
+        <!-- Captured element -->
+        <div class="vbPreview" id="vbPreview">
+          <div class="vbBg" id="vbBg"></div>
+
+          <!-- TOP-LEFT: photo + text below -->
+          <div class="vbLeft" id="vbLeft">
+            <div class="vbPhoto" id="vbPhoto"></div>
+
+            <div class="vbTextStack">
+              <div class="vbPill big" id="vbName">Name</div>
+              <div class="vbPill" id="vbJob">Job Title</div>
+              <div class="vbPill" id="vbCompany">Company</div>
+              <div class="vbPill" id="vbLocation">Location</div>
+            </div>
+          </div>
+
+          <!-- Logo bottom-left -->
+          <div class="vbBrand">
+            <img src="./logo.svg" alt="MYCARD" />
+            <span>MYCARD</span>
+          </div>
+
+          <!-- BOTTOM-RIGHT: QR ONLY -->
+          <div class="vbQrOnly" id="vbQrWrap">
+            <div class="vbQrImg" id="vbQr"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- html2canvas for download/share -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script src="storage.js"></script>
+  <script src="modules.js"></script>
+  <script src="app.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="virtual-bg.js"></script>
+</body>
+</html>

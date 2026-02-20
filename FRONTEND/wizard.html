@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Wizard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <header class="nav">
+    <div class="nav__left">
+      <button class="btn btn--chip btn--ghost" id="backBtn" type="button">← Back</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+    </div>
+  </header>
+
+  <main class="wizard">
+    <div class="wizard__top">
+      <div class="wizard__title">Create Business Card</div>
+      <div class="progress" aria-label="Progress">
+        <div class="pill" id="pill1"></div>
+        <div class="pill" id="pill2"></div>
+        <div class="pill" id="pill3"></div>
+      </div>
+    </div>
+
+    <section class="wCard">
+      <div class="step step--active" data-step="1" id="step1">
+        <div class="step__heading">Let’s get started</div>
+        <div class="step__sub">First, start with your name:</div>
+
+        <label class="field">
+          <span>Name</span>
+          <input class="input" id="name" type="text" placeholder="Jane Smith" autocomplete="name" />
+          <div class="error" id="errName"></div>
+        </label>
+
+        <button class="btn btn--primary btn--xl" id="continue1" type="button">Continue</button>
+      </div>
+
+      <div class="step" data-step="2" id="step2">
+        <div class="step__heading">Company Info</div>
+        <div class="step__sub">Add job title and company</div>
+
+        <label class="field">
+          <span>Job title</span>
+          <input class="input" id="jobTitle" type="text" placeholder="Manager" autocomplete="organization-title" />
+          <div class="error" id="errJobTitle"></div>
+        </label>
+
+        <label class="field">
+          <span>Company</span>
+          <input class="input" id="company" type="text" placeholder="ABC Inc." autocomplete="organization" />
+          <div class="error" id="errCompany"></div>
+        </label>
+
+        <div class="row">
+          <button class="btn btn--xl btn--ghost" id="back2" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="continue2" type="button">Continue</button>
+        </div>
+      </div>
+
+      <div class="step" data-step="3" id="step3">
+        <div class="step__heading">Contact Details</div>
+        <div class="step__sub">Add phone and email on your card</div>
+
+        <label class="field">
+          <span>Email</span>
+          <input class="input" id="email" type="email" placeholder="janesmith@abc.com" autocomplete="email" />
+          <div class="error" id="errEmail"></div>
+        </label>
+
+        <label class="field">
+          <span>Phone</span>
+          <input class="input" id="phone" type="tel" placeholder="+91 9876543210" autocomplete="tel" />
+          <div class="error" id="errPhone"></div>
+        </label>
+
+        <label class="field">
+          <span>Location</span>
+          <input class="input" id="location" type="text" placeholder="Karnataka, India" autocomplete="address-level2" />
+          <div class="error" id="errLocation"></div>
+        </label>
+
+        <div class="row">
+          <button class="btn btn--xl btn--ghost" id="back3" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="finish" type="button">Finish</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="wizard.js" defer></script>
+</body>
+</html>

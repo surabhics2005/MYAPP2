@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <header class="nav">
+    <div class="dashTopLeft">
+      <button class="btn btn--chip btn--ghost" id="menuBtn" type="button">☰</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+      <button id="newCardBtn" class="btn btn--primary btn--chip" type="button">+ New Card</button>
+    </div>
+  </header>
+
+  <div class="sideOverlay" id="sideOverlay" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar__top">
+      <div class="sidebar__user">
+        <div class="avatar" id="avatar">M</div>
+        <div class="userTxt">
+          <div class="userName" id="userName">MYCARD</div>
+          <div class="userEmail" id="userEmail">Welcome</div>
+        </div>
+      </div>
+
+      <button class="btn btn--chip btn--ghost" id="closeMenu" type="button">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a class="menuItem active" href="dashboard.html">🏠 Dashboard</a>
+      <a class="menuItem" href="wizard.html">➕ New Card</a>
+      <a class="menuItem" href="editor.html">✏️ Edit Card</a>
+      <a class="menuItem" href="card.html">👁️ View Card</a>
+      <a class="menuItem" href="contacts.html">👥 Contacts</a>
+      <a class="menuItem" href="analytics.html">📊 Analytics</a>
+      <a class="menuItem" href="virtual-bg.html">🖼️ Virtual Background</a>
+      <a class="menuItem" href="email-signature.html">✉️ Email Signature</a>
+      <a class="menuItem" href="qr.html">🔳 QR</a>
+      <a class="menuItem" href="index.html">🌐 Landing</a>
+      <button class="menuItem" id="logoutBtn" type="button">🚪 Logout</button>
+    </nav>
+  </aside>
+
+  <main class="dash">
+    <div class="dashHead">
+      <h1 class="dashTitle">Web Cards</h1>
+      <div class="dashHint">Your draft cards:</div>
+    </div>
+
+    <section id="cardsGrid" class="cardsGrid"></section>
+
+    <section id="emptyState" class="emptyState" style="display:none;">
+      <div class="emptyCard">
+        <div class="emptyTitle">No cards yet</div>
+        <div class="emptySub">Create your first card to see it here.</div>
+        <button class="btn btn--primary btn--xl" id="emptyCreateBtn" type="button">Create Your Own Card</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="modules.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="sidebar.js" defer></script>
+  <script src="dashboard.js" defer></script>
+</body>
+</html>

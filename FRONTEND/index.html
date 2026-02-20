@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Background (UNCHANGED) -->
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <header class="nav">
+    <div class="brand">
+      <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+      <div class="brand__name">MYCARD</div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+      <button id="loginBtn" class="btn btn--chip btn--ghost" type="button">Login / Sign up</button>
+    </div>
+  </header>
+
+  <main class="hero">
+    <section class="hero__left">
+      <div class="kicker">CREATE • SHARE • CONNECT</div>
+
+      <h1 class="title">
+        Digital<br />
+        Business Card
+      </h1>
+
+      <p class="subtitle">
+        A simple, modern way to share your profile and grow your business connects.
+      </p>
+
+      <div class="cta">
+        <button class="btn btn--primary btn--xl" type="button" id="createBtn">
+          Create Your Own Card
+        </button>
+        <button class="btn btn--secondary btn--xl" type="button" id="dashboardBtn">
+          Go to Dashboard
+        </button>
+      </div>
+    </section>
+
+    <section class="hero__right" aria-hidden="true">
+      <div class="mock">
+        <div class="mock__frame">
+          <div class="mock__top">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mock__body">
+            
+            <div class="mock__btn"></div>
+          </div>
+        </div>
+
+        <div class="mock__card">
+          <div class="mock__mini"></div>
+          <div class="mock__miniLines">
+            <div class="mock__line m1"></div>
+            <div class="mock__line m2"></div>
+            <div class="mock__line m3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

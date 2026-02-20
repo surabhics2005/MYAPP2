@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Analytics</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <!-- TOP NAV -->
+  <header class="nav">
+    <div class="dashTopLeft">
+      <button class="btn btn--chip btn--ghost" id="menuBtn" type="button">☰</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <div class="sideOverlay" id="sideOverlay" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar__top">
+      <div class="sidebar__user">
+        <div class="avatar" id="avatar">M</div>
+        <div class="userTxt">
+          <div class="userName" id="userName">MYCARD</div>
+          <div class="userEmail" id="userEmail">Welcome</div>
+        </div>
+      </div>
+      <button class="btn btn--chip btn--ghost" id="closeMenu" type="button">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a class="menuItem" href="dashboard.html">🏠 Dashboard</a>
+      <a class="menuItem" href="wizard.html">➕ New Card</a>
+      <a class="menuItem" href="editor.html">✏️ Edit Card</a>
+      <a class="menuItem" href="card.html">👁️ View Card</a>
+      <a class="menuItem" href="contacts.html">👥 Contacts</a>
+      <a class="menuItem active" href="analytics.html">📊 Analytics</a>
+      <a class="menuItem" href="virtual-bg.html">🖼️ Virtual Background</a>
+      <a class="menuItem" href="email-signature.html">✉️ Email Signature</a>
+      <a class="menuItem" href="qr.html">🔳 QR</a>
+      <a class="menuItem" href="index.html">🌐 Landing</a>
+      <button class="menuItem" id="logoutBtn" type="button">🚪 Logout</button>
+    </nav>
+  </aside>
+
+  <!-- PAGE -->
+  <main class="anaPage">
+    <div class="anaHead">
+      <div>
+        <h1 class="anaTitle">Analytics</h1>
+        <div class="anaSub">Track views, visitors, and clicks for each card.</div>
+      </div>
+
+      <div class="anaPick">
+        <label class="field" style="margin:0;">
+          <span>Select Card</span>
+          <select class="input" id="anaCardSelect"></select>
+        </label>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <section class="anaStats">
+      <div class="anaStat">
+        <div class="anaStatLabel">Views</div>
+        <div class="anaStatValue" id="stViews">0</div>
+        <div class="anaStatHint">Total opens</div>
+      </div>
+
+      <div class="anaStat">
+        <div class="anaStatLabel">Unique Visitors</div>
+        <div class="anaStatValue" id="stVisitors">0</div>
+        <div class="anaStatHint">Approx unique devices</div>
+      </div>
+
+      <div class="anaStat">
+        <div class="anaStatLabel">Contact Saves</div>
+        <div class="anaStatValue" id="stSaves">0</div>
+        <div class="anaStatHint">Save contact clicks</div>
+      </div>
+
+      <div class="anaStat">
+        <div class="anaStatLabel">Clicks</div>
+        <div class="anaStatValue" id="stClicks">0</div>
+        <div class="anaStatHint">Total button taps</div>
+      </div>
+    </section>
+
+    <!-- PANELS -->
+    <section class="anaGrid">
+      <!-- CLICK BREAKDOWN -->
+      <div class="anaPanel">
+        <div class="anaPanelTitle">Clicks Breakdown</div>
+        <div class="anaList" id="clickList"></div>
+      </div>
+
+      <!-- SOURCES -->
+      <div class="anaPanel">
+        <div class="anaPanelTitle">Traffic Sources</div>
+        <div class="anaList" id="srcList"></div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <div class="anaPanel anaPanelFull">
+        <div class="anaPanelTitle">Recent Activity</div>
+        <div class="anaTableWrap">
+          <table class="anaTable">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Event</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="activityRows"></tbody>
+          </table>
+        </div>
+        <div class="anaEmpty" id="anaEmpty" style="display:none;">
+          No analytics yet. Open your card or click buttons to generate data.
+        </div>
+      </div>
+    </section>
+
+    <section class="anaActions">
+      <button class="btn btn--xl btn--ghost" id="backDashBtn" type="button">← Back</button>
+      <button class="btn btn--xl" id="resetAnaBtn" type="button">Reset Analytics</button>
+    </section>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="modules.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="sidebar.js" defer></script>
+  <script src="analytics.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD Admin</title>
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#121923;
+      --card2:#0f1520;
+      --text:#e7eef8;
+      --muted:#9fb0c5;
+      --ok:#36d399;
+      --err:#ff6b6b;
+      --accent:#16c784;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 20px 60px rgba(0,0,0,.45);
+      --r:18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 15%, rgba(22,199,132,.20), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(90,130,255,.20), transparent 60%),
+        radial-gradient(900px 600px at 40% 90%, rgba(255,120,90,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .wrap{width:min(980px, 100%);}
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn:hover{background:rgba(255,255,255,.08)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(22,199,132,.95), rgba(0,180,120,.75));
+      border-color: rgba(22,199,132,.35);
+      color:#04150e;
+    }
+    .btn.danger{
+      background:rgba(255,107,107,.12);
+      border-color: rgba(255,107,107,.35);
+      color: #ffd0d0;
+    }
+    .btn:disabled{opacity:.6; cursor:not-allowed}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .loginBox{
+      padding:22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      max-width:520px;
+      margin: 0 auto;
+    }
+    .title{
+      font-size:28px;
+      font-weight:900;
+      margin:0;
+      letter-spacing:.3px;
+      text-align:center;
+    }
+    .sub{
+      text-align:center;
+      color:var(--muted);
+      margin-top:-6px;
+      font-size:14px;
+    }
+
+    .field{display:grid; gap:6px;}
+    .label{color:var(--muted); font-size:13px;}
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(10,14,20,.55);
+      color: var(--text);
+      outline:none;
+    }
+    .input:focus{border-color: rgba(22,199,132,.55); box-shadow: 0 0 0 3px rgba(22,199,132,.16);}
+
+    .msg{
+      min-height:20px;
+      font-weight:700;
+      text-align:center;
+      color: var(--err);
+    }
+
+    .panel{
+      padding:18px;
+      display:none;
+    }
+    .toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .tabs{display:flex; gap:10px; flex-wrap:wrap;}
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      cursor:pointer;
+      font-weight:700;
+      color:var(--text);
+    }
+    .tab.active{
+      background: rgba(22,199,132,.14);
+      border-color: rgba(22,199,132,.35);
+      color: #c9ffe6;
+    }
+    .search{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1;
+      min-width:240px;
+      justify-content:flex-end;
+    }
+    .search .input{max-width:340px}
+    .status{color:var(--muted); font-size:13px;}
+
+    .errorBox{
+      display:none;
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,107,107,.35);
+      background: rgba(255,107,107,.08);
+      color: #ffd0d0;
+      font-weight:700;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+    }
+    table{width:100%; border-collapse:collapse; min-width:760px;}
+    th, td{
+      padding:12px 10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+      text-align:left;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+    th{color:var(--muted); font-weight:800; font-size:12px; letter-spacing:.8px;}
+    tr:hover td{background: rgba(255,255,255,.03);}
+    .mono{font-family: var(--mono); font-size:12px; color:#cfe1ff;}
+    .badge{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(22,199,132,.30);
+      background:rgba(22,199,132,.10);
+      color:#c9ffe6;
+      font-weight:800;
+      font-size:12px;
+    }
+    .rowBtns{display:flex; gap:8px; justify-content:flex-end;}
+    .rowBtns .btn{padding:8px 10px;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:4px;background:var(--accent)"></span>
+        MYCARD
+        <span class="pill">ADMIN</span>
+      </div>
+      <div class="actions">
+        <button id="logoutBtn" class="btn danger" type="button" style="display:none;">Logout</button>
+      </div>
+    </div>
+
+    <!-- LOGIN CARD -->
+    <section id="loginCard" class="card">
+      <div class="loginBox">
+        <h1 class="title">Admin Login</h1>
+        <div class="sub">Use your normal MYCARD account (Surabhi) to open admin.</div>
+
+        <div class="field">
+          <div class="label">Email</div>
+          <input id="adminEmail" class="input" type="email" placeholder="surabhics2005@gmail.com" />
+        </div>
+
+        <div class="field">
+          <div class="label">Password</div>
+          <input id="adminPass" class="input" type="password" placeholder="••••••••" />
+        </div>
+
+        <button id="adminLoginBtn" class="btn primary" type="button">Enter Admin Panel</button>
+        <div id="loginMsg" class="msg"></div>
+      </div>
+    </section>
+
+    <!-- PANEL CARD -->
+    <section id="panelCard" class="card panel">
+      <div class="toolbar">
+        <div class="tabs">
+          <button id="tabUsers" class="tab active" type="button">Users</button>
+          <button id="tabCards" class="tab" type="button">Cards</button>
+          <button id="refreshBtn" class="btn" type="button">Refresh</button>
+        </div>
+
+        <div class="search">
+          <input id="searchInput" class="input" type="text" placeholder="Search (name, email, id, title)" />
+          <span id="statusMsg" class="status"></span>
+        </div>
+      </div>
+
+      <div id="errorBox" class="errorBox"></div>
+
+      <div class="tableWrap">
+        <table>
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>

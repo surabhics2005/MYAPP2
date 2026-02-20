@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Card</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Card page fixes (kept here so view looks EXACTLY like preview) -->
+  <style>
+    /* message box (never blank) */
+    #msg{
+      display:none;
+      max-width: 760px;
+      margin: 14px auto 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      white-space: pre-wrap;
+    }
+    html[data-theme="light"] #msg{
+      border-color: rgba(0,0,0,.10);
+      background: rgba(0,0,0,.04);
+      color: rgba(0,0,0,.82);
+    }
+
+    /* Buttons visibility in LIGHT theme (hover should not hide text) */
+    html[data-theme="light"] .btn{
+      color: rgba(0,0,0,.88) !important;
+      border-color: rgba(0,0,0,.12) !important;
+    }
+    html[data-theme="light"] .btn:hover{
+      background: rgba(0,0,0,.06) !important;
+      color: rgba(0,0,0,.92) !important;
+      filter: none !important;
+    }
+
+    /* --- IMPORTANT: stop profile overlapping banner (VIEW PAGE) --- */
+    #cardView .cardTop{
+      padding: 14px 16px 10px !important;
+      display:flex !important;
+      gap: 14px !important;
+      align-items:center !important;
+    }
+    #cardView .profileWrap{
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      transform: none !important;
+      margin-top: 0 !important;
+    }
+
+    /* Two-column info (left: company+email, right: phone+location) */
+    .infoGrid{
+      margin-top: 10px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+    }
+    @media (max-width: 520px){
+      .infoGrid{ grid-template-columns: 1fr; }
+    }
+
+    /* Export-safe mode for html2canvas (avoids color-mix/oklab issues) */
+    #cardView.exportMode,
+    .exportMode #cardView{
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <header class="nav">
+    <div class="nav__left">
+      <button class="btn btn--chip btn--ghost" id="backDash" type="button">← Dashboard</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+      <button class="btn btn--chip" id="editBtn" type="button">✏️ Edit</button>
+      <button class="btn btn--chip" id="shareBtn" type="button">🔗 Share Link</button>
+      <button class="btn btn--primary btn--chip" id="downloadBtn" type="button">⬇️ Download JPG</button>
+    </div>
+  </header>
+
+  <div id="msg"></div>
+
+  <main class="cardPage">
+    <div class="liveCard" id="cardView" data-bg="gradient" data-header="left" data-template="classic">
+      <div class="cardBanner" id="cvBanner"></div>
+
+      <div class="cardTop">
+        <div class="profileWrap">
+          <div class="profilePic" id="cvProfile"></div>
+        </div>
+
+        <div class="topText">
+          <div class="pName" id="cvName">Name</div>
+          <div class="pMeta" id="cvMeta">Tagline</div>
+        </div>
+      </div>
+
+      <div class="cardBody">
+        <!-- 2-column info layout -->
+        <div class="infoGrid">
+          <div class="pLine" id="cvCompany"></div>
+          <div class="pLine" id="cvPhone"></div>
+
+          <div class="pLine" id="cvEmail"></div>
+          <div class="pLine" id="cvLocation"></div>
+        </div>
+
+        <div class="pDesc" id="cvDesc" style="display:none;"></div>
+
+        <div class="sectionTitle" id="linksTitle" style="display:none;">Links</div>
+        <div class="linkRow" id="cvLinks" style="display:none;"></div>
+
+        <div class="sectionTitle" id="servicesTitle" style="display:none;">Services</div>
+        <div class="svcChips" id="cvServices" style="display:none;"></div>
+      </div>
+
+      <div class="cardFooter">MYCARD</div>
+    </div>
+  </main>
+
+  <!-- html2canvas for JPG export -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script src="storage.js" defer></script>
+  <script src="modules.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="card.js" defer></script>
+</body>
+</html>

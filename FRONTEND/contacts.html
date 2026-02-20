@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Contacts</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <!-- TOP NAV -->
+  <header class="nav">
+    <div class="dashTopLeft">
+      <button class="btn btn--chip btn--ghost" id="menuBtn" type="button">☰</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+      <button id="backBtn" class="btn btn--chip btn--ghost" type="button">← Back</button>
+      <button id="newContactBtnTop" class="btn btn--primary btn--chip" type="button">+ New Contact</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <div class="sideOverlay" id="sideOverlay" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar__top">
+      <div class="sidebar__user">
+        <div class="avatar" id="avatar">M</div>
+        <div class="userTxt">
+          <div class="userName" id="userName">MYCARD</div>
+          <div class="userEmail" id="userEmail">Welcome</div>
+        </div>
+      </div>
+      <button class="btn btn--chip btn--ghost" id="closeMenu" type="button">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a class="menuItem" href="dashboard.html">🏠 Dashboard</a>
+      <a class="menuItem" href="wizard.html">➕ New Card</a>
+      <a class="menuItem" href="editor.html">✏️ Edit Card</a>
+      <a class="menuItem" href="card.html">👁️ View Card</a>
+      <a class="menuItem active" href="contacts.html">👥 Contacts</a>
+      <a class="menuItem" href="analytics.html">📊 Analytics</a>
+      <a class="menuItem" href="virtual-bg.html">🖼️ Virtual Background</a>
+      <a class="menuItem" href="email-signature.html">✉️ Email Signature</a>
+      <a class="menuItem" href="qr.html">🔳 QR</a>
+      <a class="menuItem" href="index.html">🌐 Landing</a>
+      <button class="menuItem" id="logoutBtn" type="button">🚪 Logout</button>
+    </nav>
+  </aside>
+
+  <main class="contactsPage">
+    <div class="contactsHead">
+      <div>
+        <h1 class="contactsTitle">Contacts</h1>
+        <div class="contactsSub">Add, search, edit and delete contacts. Saved locally on this device.</div>
+      </div>
+
+      <div class="contactsHeadRight">
+        <input id="searchInput" class="input contactsSearch" type="text" placeholder="Search by name, company, email, mobile, location..." />
+        <button class="btn btn--primary btn--chip" id="newContactBtn" type="button">+ New Contact</button>
+      </div>
+    </div>
+
+    <section class="contactsTableWrap">
+      <table class="contactsTable">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Name</th>
+            <th style="width: 16%;">Title</th>
+            <th style="width: 16%;">Company</th>
+            <th style="width: 18%;">Email</th>
+            <th style="width: 14%;">Mobile</th>
+            <th style="width: 12%;">Location</th>
+            <th style="width: 16%;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="contactsBody"></tbody>
+      </table>
+
+      <div class="contactsEmpty" id="contactsEmpty" style="display:none;">
+        No contacts yet. Click <b>New Contact</b> to add your first one.
+      </div>
+    </section>
+  </main>
+
+  <!-- ADD/EDIT MODAL -->
+  <div class="mcModal" id="contactModal" aria-hidden="true">
+    <div class="mcModal__backdrop" data-close="1"></div>
+    <div class="mcModal__panel" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <div class="mcModal__top">
+        <div class="mcModal__title" id="contactModalTitle">New Contact</div>
+        <button class="btn btn--chip btn--ghost" id="closeContactModal" type="button">✕</button>
+      </div>
+
+      <div class="mcModal__body">
+        <div class="grid2">
+          <label class="field">
+            <span>Name</span>
+            <input class="input" id="cName" type="text" placeholder="Contact name" />
+          </label>
+          <label class="field">
+            <span>Title</span>
+            <input class="input" id="cTitle" type="text" placeholder="Job title" />
+          </label>
+          <label class="field">
+            <span>Company</span>
+            <input class="input" id="cCompany" type="text" placeholder="Company" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input class="input" id="cEmail" type="email" placeholder="name@example.com" />
+          </label>
+          <label class="field">
+            <span>Mobile</span>
+            <input class="input" id="cMobile" type="tel" placeholder="+91 9876543210" />
+          </label>
+          <label class="field">
+            <span>Location</span>
+            <input class="input" id="cLocation" type="text" placeholder="City" />
+          </label>
+        </div>
+
+        <div class="errText" id="cErr"></div>
+      </div>
+
+      <div class="mcModal__actions">
+        <button class="btn btn--xl btn--ghost" id="cancelContactBtn" type="button">Cancel</button>
+        <button class="btn btn--primary btn--xl" id="saveContactBtn" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE MODAL -->
+  <div class="mcModal" id="shareModal" aria-hidden="true">
+    <div class="mcModal__backdrop" data-close="1"></div>
+    <div class="mcModal__panel" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+      <div class="mcModal__top">
+        <div class="mcModal__title" id="shareModalTitle">Share your card</div>
+        <button class="btn btn--chip btn--ghost" id="closeShareModal" type="button">✕</button>
+      </div>
+
+      <div class="mcModal__body">
+        <div class="hint" style="margin-bottom:10px;">
+          Choose which card to share with this contact. You can share <b>Image</b> or <b>Link</b>.
+        </div>
+
+        <label class="field">
+          <span>Select Card</span>
+          <select class="input" id="shareCardSelect"></select>
+        </label>
+
+        <div class="shareRow">
+          <button class="btn btn--primary btn--xl" id="shareImageBtn" type="button">🖼️ Share Card Image (JPG)</button>
+          <button class="btn btn--xl" id="shareLinkBtn" type="button">🔗 Share Link</button>
+          <button class="btn btn--xl btn--ghost" id="copyLinkBtn" type="button">📋 Copy Link</button>
+        </div>
+
+        <div class="hint" id="shareHint" style="margin-top:10px;"></div>
+        <div class="errText" id="shareErr"></div>
+
+        <!-- Hidden capture area -->
+        <div class="captureWrap" aria-hidden="true">
+          <div class="cardCapture" id="cardCapture">
+            <div class="ccTop">
+              <div class="ccBrand">
+                <img src="./logo.svg" alt="MYCARD" />
+                <span>MYCARD</span>
+              </div>
+            </div>
+
+            <div class="ccBody">
+              <div class="ccLeft">
+                <div class="ccAvatar" id="ccAvatar"></div>
+              </div>
+
+              <div class="ccRight">
+                <div class="ccName" id="ccName">Name</div>
+                <div class="ccTag" id="ccTag">Tagline</div>
+
+                <div class="ccMeta" id="ccMeta"></div>
+
+                <div class="ccLinkLine">
+                  <span class="ccLinkLabel">Card:</span>
+                  <span class="ccLinkText" id="ccLinkText"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ccFooter">
+              <div class="ccAccentBar" id="ccAccentBar"></div>
+            </div>
+          </div>
+        </div>
+        <!-- /Hidden capture area -->
+
+      </div>
+
+      <div class="mcModal__actions">
+        <button class="btn btn--xl btn--ghost" id="closeShareBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- html2canvas for image share -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script src="storage.js" defer></script>
+  <script src="modules.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="sidebar.js" defer></script>
+  <script src="contacts.js" defer></script>
+</body>
+</html>

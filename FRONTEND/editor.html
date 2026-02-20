@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MYCARD - Editor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="landing-bg" aria-hidden="true">
+    <div class="bg-layer bg-base"></div>
+    <div class="bg-layer bg-glow"></div>
+    <div class="bg-layer bg-waves"></div>
+    <div class="bg-layer bg-stars"></div>
+    <div class="bg-layer bg-particles"></div>
+  </div>
+
+  <header class="nav">
+    <div class="nav__left">
+      <button class="btn btn--chip btn--ghost" id="backToDash" type="button">← Dashboard</button>
+      <div class="brand brand--compact">
+        <img class="brand__logo" src="./logo.svg" alt="MYCARD logo" />
+        <div class="brand__name">MYCARD</div>
+      </div>
+    </div>
+
+    <div class="nav__actions">
+      <button id="themeToggle" class="btn btn--chip" type="button">☀️</button>
+    </div>
+  </header>
+
+  <main class="editorWrap">
+    <section class="editorLeft">
+      <div class="editorHeader">
+        <h1 class="editorTitle">Edit your card</h1>
+        <div class="editorSub">Update details, links, theme, and services. Preview updates live.</div>
+
+        <div class="editorSteps">
+          <button class="stepTab active" data-tab="basic" type="button">Basic details</button>
+          <button class="stepTab" data-tab="desc" type="button">Description</button>
+          <button class="stepTab" data-tab="links" type="button">Links</button>
+          <button class="stepTab" data-tab="theme" type="button">Theme</button>
+          <button class="stepTab" data-tab="services" type="button">Services</button>
+        </div>
+      </div>
+
+      <!-- BASIC -->
+      <div class="panel active" id="panel-basic">
+        <div class="panelTitle">Basic details</div>
+
+        <div class="formGrid">
+          <label class="field"><span>Name</span><input class="input" id="inName" type="text" /></label>
+          <label class="field"><span>Tagline (job title)</span><input class="input" id="inTagline" type="text" /></label>
+          <label class="field"><span>Company</span><input class="input" id="inCompany" type="text" /></label>
+          <label class="field"><span>Email</span><input class="input" id="inEmail" type="email" /></label>
+          <label class="field"><span>Phone</span><input class="input" id="inPhone" type="tel" /></label>
+          <label class="field"><span>Location</span><input class="input" id="inLocation" type="text" /></label>
+        </div>
+
+        <div class="uploadRow">
+          <div class="uploadCard">
+            <div class="uploadTitle">Banner image</div>
+            <input class="input" id="bannerFile" type="file" accept="image/*" />
+            <div class="uploadHint">Recommended: 1200×400</div>
+          </div>
+
+          <div class="uploadCard">
+            <div class="uploadTitle">Profile image</div>
+            <input class="input" id="profileFile" type="file" accept="image/*" />
+            <div class="uploadHint">Square image works best</div>
+          </div>
+        </div>
+
+        <div class="panelActions">
+          <button class="btn btn--xl btn--ghost" id="basicBack" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="basicNext" type="button">Update & Next</button>
+        </div>
+      </div>
+
+      <!-- DESC -->
+      <div class="panel" id="panel-desc">
+        <div class="panelTitle">Description</div>
+        <label class="field">
+          <span>About you / services details</span>
+          <textarea class="textarea" id="inDesc" placeholder="Write something... (line breaks will show)"></textarea>
+          <div class="hint">Tip: You can use multiple lines. Preview keeps line breaks.</div>
+        </label>
+        <div class="panelActions">
+          <button class="btn btn--xl btn--ghost" id="descBack" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="descNext" type="button">Update & Next</button>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="panel" id="panel-links">
+        <div class="panelTitle">Links</div>
+        <div class="formGrid">
+          <label class="field"><span>Website</span><input class="input" id="inWebsite" type="text" placeholder="example.com" /></label>
+          <label class="field"><span>WhatsApp</span><input class="input" id="inWhatsapp" type="text" placeholder="+91XXXXXXXXXX or wa.me link" /></label>
+          <label class="field"><span>Instagram</span><input class="input" id="inInstagram" type="text" placeholder="instagram.com/username" /></label>
+          <label class="field"><span>Facebook</span><input class="input" id="inFacebook" type="text" placeholder="facebook.com/username" /></label>
+          <label class="field"><span>Telegram</span><input class="input" id="inTelegram" type="text" placeholder="t.me/username" /></label>
+        </div>
+        <div class="panelActions">
+          <button class="btn btn--xl btn--ghost" id="linksBack" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="linksNext" type="button">Update & Next</button>
+        </div>
+      </div>
+
+      <!-- THEME -->
+      <div class="panel" id="panel-theme">
+        <div class="panelTitle">Theme</div>
+
+        <div class="themeBlock">
+          <div class="blockHead">
+            <div>
+              <div class="blockTitle">Base color</div>
+              <div class="blockSub">Applies to buttons & accents</div>
+            </div>
+          </div>
+          <input class="input" id="inColor" type="color" style="height:52px;" />
+        </div>
+
+        <div class="themeBlock">
+          <div class="blockHead">
+            <div>
+              <div class="blockTitle">Header style</div>
+              <div class="blockSub">Moves profile + name together</div>
+            </div>
+          </div>
+          <div class="choiceGrid" id="headerChoices"></div>
+        </div>
+
+        <div class="themeBlock">
+          <div class="blockHead">
+            <div>
+              <div class="blockTitle">Background</div>
+              <div class="blockSub">Select background pattern</div>
+            </div>
+          </div>
+          <div class="choiceGrid" id="bgChoices"></div>
+        </div>
+
+        <div class="themeBlock">
+          <div class="blockHead">
+            <div>
+              <div class="blockTitle">Template</div>
+              <div class="blockSub">Applies to whole card</div>
+            </div>
+          </div>
+          <div class="choiceGrid" id="tplChoices"></div>
+        </div>
+
+        <div class="panelActions">
+          <button class="btn btn--xl btn--ghost" id="themeBack" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="themeNext" type="button">Update & Next</button>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="panel" id="panel-services">
+        <div class="panelTitle">Services</div>
+
+        <div class="serviceAddRow">
+          <input class="input" id="svcInput" type="text" placeholder="Add a service (e.g., Web Design)" />
+          <button class="btn btn--chip btn--primary" id="svcAddBtn" type="button">Add</button>
+        </div>
+
+        <div class="svcList" id="svcList"></div>
+
+        <div class="panelActions">
+          <button class="btn btn--xl btn--ghost" id="servicesBack" type="button">Back</button>
+          <button class="btn btn--primary btn--xl" id="finishBtn" type="button">Finish</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE PREVIEW -->
+    <aside class="editorRight">
+      <div class="previewTitle">Live Preview</div>
+
+      <div class="liveCard" id="liveCard" data-bg="gradient" data-header="left" data-template="classic">
+        <div class="cardBanner" id="pvBanner"></div>
+
+        <div class="cardTop">
+          <div class="profileWrap">
+            <div class="profilePic" id="pvProfile"></div>
+          </div>
+
+          <div class="topText">
+            <div class="pName" id="pvName">Name</div>
+            <div class="pMeta" id="pvMeta">Tagline</div>
+          </div>
+        </div>
+
+        <div class="cardBody">
+          <div class="pLine" id="pvCompany"></div>
+          <div class="pLine" id="pvEmail"></div>
+          <div class="pLine" id="pvPhone"></div>
+          <div class="pLine" id="pvLocation"></div>
+
+          <div class="pDesc" id="pvDesc" style="display:none;"></div>
+
+          <div class="linkRow" id="pvLinks"></div>
+          <div class="svcChips" id="pvServices"></div>
+        </div>
+
+        <div class="cardFooter">MYCARD</div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="modules.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="sidebar.js" defer></script>
+  <script src="editor.js" defer></script>
+</body>
+</html>
