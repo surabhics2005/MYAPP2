@@ -1,0 +1,5 @@
+venv/
+_pycache__/
+*._pyc
+.env
+mycard.db
